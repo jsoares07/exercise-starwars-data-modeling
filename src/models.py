@@ -29,5 +29,56 @@ class Address(Base):
     def to_dict(self):
         return {}
 
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    user_name = Column(String(120), ForeignKey('person.name'), nullable=False)
+    username = Column(String(250), nullable=False)
+    password = Column(String(250), nullable=False)
+
+class Favorite(Base):
+    __tablename__= 'favorite'
+    id = Column(Integer, primary_key=True)
+    user_id = Column (Integer, ForeignKey('user.id'))
+    characters_id = Column(Integer, ForeignKey('characters.id'))
+    planets_id= Column(Integer, ForeignKey('planets.id'))
+    vehicles_id= Column(Integer, ForeignKey('vehicles.id'))
+    starships_id= Column(Integer, ForeignKey('starships.id'))
+
+class Characters(Base):
+    __tablename__ = 'characters'
+    id = Column(Integer,primary_key=True)
+    name = Column(String(120), nullable=False)
+    eye_color = Column(String(120), nullable=False)
+    planets_id= Column(Integer, ForeignKey('planets.id'))
+    vehicles_id= Column(Integer, ForeignKey('vehicles.id'))
+    starships_id= Column(Integer, ForeignKey('starships.id'))
+    
+
+class Planets(Base):
+    __tablename__ = 'planets'
+    id = Column(Integer,primary_key=True)
+    name = Column(String(120), nullable=False)
+    diameter = Column(Integer)
+    population = Column(Integer)
+ 
+class Vehicles(Base):
+    __tablename__ = 'vehicles'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(120), nullable=False)
+    model = Column(String(120), nullable=False)
+    crew = Column(Integer)
+
+class Starships(Base):
+    __tablename__ ='starships'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(120), nullable=False)
+    model = Column(String(120), nullable=False)
+    characters_id= Column(Integer, ForeignKey('characters.id'))
+    length = Column(Integer)
+
+
+
+
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
