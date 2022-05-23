@@ -61,6 +61,7 @@ class Planets(Base):
     name = Column(String(120), nullable=False)
     diameter = Column(Integer)
     population = Column(Integer)
+    characters = relationship(Characters)
  
 class Vehicles(Base):
     __tablename__ = 'vehicles'
@@ -68,6 +69,7 @@ class Vehicles(Base):
     name = Column(String(120), nullable=False)
     model = Column(String(120), nullable=False)
     crew = Column(Integer)
+    characters = relationship(Characters)
 
 class Starships(Base):
     __tablename__ ='starships'
@@ -76,6 +78,7 @@ class Starships(Base):
     model = Column(String(120), nullable=False)
     characters_id= Column(Integer, ForeignKey('characters.id'))
     length = Column(Integer)
+    characters = relationship(Characters)
 
 
 
